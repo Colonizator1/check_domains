@@ -1,0 +1,15 @@
+#!/bin/bash
+
+list=(
+test.com
+example.com
+noexist.io
+)
+
+for domain in "${list[@]}" ; do
+  status=$(curl -s -o /dev/null -IL -w %{http_code} http://${domain}/)
+  if [ "${status}" = "200" ]
+  then
+	  printf "${domain}\n"
+  fi
+done
